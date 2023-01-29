@@ -1,9 +1,9 @@
-# The Criminal Justice Sector SDK 
+# The Criminal Justice Sector DataShare SDK 
 
 
 [![Tests](https://img.shields.io/github/actions/workflow/status/javaabu-pvt-ltd/criminal-justice-sector-db-sdk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/javaabu-pvt-ltd/criminal-justice-sector-db-sdk/actions/workflows/run-tests.yml)
 
-The Criminal Justice Sector DB SDKis a wrapper package that allows developers to integrate their existing data infrastructure with the data-sharing platform developed by the Prosecutor General's Office.
+The Criminal Justice Sector DataShare SDKis a wrapper package that allows developers to integrate their existing data infrastructure with the data-sharing platform developed by the Prosecutor General's Office.
 
 
 

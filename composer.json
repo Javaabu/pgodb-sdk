@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.5"
     },
     "require-dev": {
         "pestphp/pest": "^1.20",
@@ -24,16 +25,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Javaabu\\CriminalJusticeSectorDB\\": "src"
+            "Javaabu\\CriminalJusticeSectorDataShare\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Javaabu\\CriminalJusticeSectorDB\\Tests\\": "tests"
+            "Javaabu\\CriminalJusticeSectorDataShare\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "test": "vendor/bin/pest",
+        "test": "vendor/bin/pest --debug",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
