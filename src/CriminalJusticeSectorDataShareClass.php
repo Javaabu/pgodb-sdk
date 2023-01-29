@@ -12,16 +12,12 @@ class CriminalJusticeSectorDataShareClass
         protected string $baseUri,
         protected string $accessToken,
 
-    )
-    {
+    ) {
         $this->criminalCase = new CriminalCase($this->baseUri, $this->accessToken);
     }
 
-    public function criminalCase() : ?CriminalCase
+    public function criminalCase(): ?CriminalCase
     {
         return $this->criminalCase;
     }
-
-
-
 }

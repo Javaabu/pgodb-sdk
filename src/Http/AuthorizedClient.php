@@ -16,8 +16,8 @@ class AuthorizedClient
         $this->client = new Client([
             'base_uri' => $this->baseUri,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->accessToken
-            ]
+                'Authorization' => 'Bearer '.$this->accessToken,
+            ],
         ]);
     }
 
@@ -27,15 +27,16 @@ class AuthorizedClient
             $response = $this->client->delete($endpoint);
             if ($response->getStatusCode() != 200) {
                 return json_encode([
-                    "message" => "An error occurred in DELETE . " . $response->getBody(),
-                    "status" => $response->getStatusCode()
+                    'message' => 'An error occurred in DELETE . '.$response->getBody(),
+                    'status' => $response->getStatusCode(),
                 ]);
             }
+
             return $response->getBody()->getContents();
         } catch (GuzzleException $e) {
             return json_encode([
-                "message" => $e->getMessage(),
-                "status" => 500
+                'message' => $e->getMessage(),
+                'status' => 500,
             ]);
         }
     }
@@ -47,19 +48,19 @@ class AuthorizedClient
                 ['body' => json_encode($data, true)]);
             if ($response->getStatusCode() != 200) {
                 return json_encode([
-                    "message" => "An error occurred in PATCH. " . $response->getBody(),
-                    "status" => $response->getStatusCode()
+                    'message' => 'An error occurred in PATCH. '.$response->getBody(),
+                    'status' => $response->getStatusCode(),
                 ]);
             }
+
             return $response->getBody()->getContents();
         } catch (GuzzleException $e) {
             return json_encode([
-                "message" => $e->getMessage(),
-                "status" => 500
+                'message' => $e->getMessage(),
+                'status' => 500,
             ]);
         }
     }
-
 
     public function post(string $endpoint, array $data): string
     {
@@ -68,19 +69,19 @@ class AuthorizedClient
                 ['body' => json_encode($data, true)]);
             if ($response->getStatusCode() != 200) {
                 return json_encode([
-                    "message" => "An error occurred in POST. " . $response->getBody(),
-                    "status" => $response->getStatusCode()
+                    'message' => 'An error occurred in POST. '.$response->getBody(),
+                    'status' => $response->getStatusCode(),
                 ]);
             }
+
             return $response->getBody()->getContents();
         } catch (GuzzleException $e) {
             return json_encode([
-                "message" => $e->getMessage(),
-                "status" => 500
+                'message' => $e->getMessage(),
+                'status' => 500,
             ]);
         }
     }
-
 
     public function get(string $endpoint, array $filters = []): string
     {
@@ -88,15 +89,16 @@ class AuthorizedClient
             $response = $this->client->get($endpoint, $filters);
             if ($response->getStatusCode() != 200) {
                 return json_encode([
-                    "message" => "An error occurred in GET. " . $response->getBody(),
-                    "status" => $response->getStatusCode()
+                    'message' => 'An error occurred in GET. '.$response->getBody(),
+                    'status' => $response->getStatusCode(),
                 ]);
             }
+
             return $response->getBody()->getContents();
         } catch (GuzzleException $e) {
             return json_encode([
-                "message" => $e->getMessage(),
-                "status" => 500
+                'message' => $e->getMessage(),
+                'status' => 500,
             ]);
         }
     }

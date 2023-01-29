@@ -1,16 +1,16 @@
 <?php
 
 it('retrieves an array from (GET) `/criminal-cases/`', function () {
-    $base_uri = "test";
-    $token = "test";
+    $base_uri = 'test';
+    $token = 'test';
     $db = new \Javaabu\CriminalJusticeSectorDataShare\CriminalJusticeSectorDataShareClass($base_uri, $token);
     $resArray = $db->criminalCase()->index();
     expect($resArray)->toBeArray();
 });
 
-it('retrieves the correct page from a paginated response from (GET) `/criminal-case/`', function() {
-    $base_uri = "test";
-    $token = "test";
+it('retrieves the correct page from a paginated response from (GET) `/criminal-case/`', function () {
+    $base_uri = 'test';
+    $token = 'test';
     $db = new \Javaabu\CriminalJusticeSectorDataShare\CriminalJusticeSectorDataShareClass($base_uri, $token);
     $resArray = $db->criminalCase()->index();
     expect($resArray)->toBeArray();
@@ -21,9 +21,9 @@ it('retrieves the correct page from a paginated response from (GET) `/criminal-c
 });
 
 it('retrieves the model once an identifier is provided from (GET) `/criminal-case/', function () {
-    $base_uri = "test";
-    $token = "test";
+    $base_uri = 'test';
+    $token = 'test';
     $db = new \Javaabu\CriminalJusticeSectorDataShare\CriminalJusticeSectorDataShareClass($base_uri, $token);
     $resArray = $db->criminalCase()->selectById('AAAA60485211');
-    expect(sizeof($resArray["data"]))->toEqual(1);
+    expect(count($resArray['data']))->toEqual(1);
 });
