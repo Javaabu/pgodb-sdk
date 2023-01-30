@@ -4,14 +4,12 @@ namespace Javaabu\CriminalJusticeSectorDataShare\Util;
 
 class UrlQuery
 {
-
     public function __construct(
-        protected string  $url,
-        protected array   $sorts = [],
-        protected array   $filters = [],
+        protected string $url,
+        protected array $sorts = [],
+        protected array $filters = [],
         protected ?string $page = null
-    )
-    {
+    ) {
     }
 
     public function addFilter(string $filterKey, string $value): void
@@ -23,7 +21,6 @@ class UrlQuery
     {
         $this->page = $page;
     }
-
 
     public function addSortByAscending(string $key): void
     {
@@ -37,8 +34,8 @@ class UrlQuery
 
     public function getPageQuery(): string
     {
-        if (!$this->page) {
-            return "";
+        if (! $this->page) {
+            return '';
         }
 
         return "page={$this->page}";
@@ -47,30 +44,31 @@ class UrlQuery
     public function getSortQuery(): string
     {
         if (empty($this->sorts)) {
-            return "";
+            return '';
         }
 
-        $sortKeys = implode(",", $this->sorts);
-        return "sort=" . $sortKeys;
+        $sortKeys = implode(',', $this->sorts);
+
+        return 'sort='.$sortKeys;
     }
 
     public function getFilterQuery(): string
     {
         if (empty($this->filters)) {
-            return "";
+            return '';
         }
 
-        return implode("&", $this->filters);
+        return implode('&', $this->filters);
     }
 
     public function hasSorts(): bool
     {
-        return !empty($this->sorts);
+        return ! empty($this->sorts);
     }
 
     public function hasFilters(): bool
     {
-        return !empty($this->filters);
+        return ! empty($this->filters);
     }
 
     public function hasPage(): bool
@@ -81,11 +79,11 @@ class UrlQuery
     public function getQuery(string $endpoint): string
     {
         if ($this->hasSorts()) {
-            $endpoint .= '?' . $this->getSortQuery();
-        } else if ($this->hasFilters()) {
-            $endpoint .= '?' . $this->getFilterQuery();
-        } else if ($this->hasPage()) {
-            $endpoint .= '?' . $this->getPageQuery();
+            $endpoint .= '?'.$this->getSortQuery();
+        } elseif ($this->hasFilters()) {
+            $endpoint .= '?'.$this->getFilterQuery();
+        } elseif ($this->hasPage()) {
+            $endpoint .= '?'.$this->getPageQuery();
         }
 
         return $endpoint;
