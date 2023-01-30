@@ -17,6 +17,6 @@ class Institution implements Model
 
     public function urlResourceName(): string
     {
-        return 'court-cases';
+        return 'institutions';
     }
 }
