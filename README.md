@@ -9,8 +9,9 @@ The Criminal Justice Sector DataShare SDKis a wrapper package that allows develo
 
 ### Instantiation
 ````
-$base_uri = "https://pgodb.javaabu.net"; 
-$token = "euiodeji32098u82390458"; 
+$base_uri = config('pgodb.base_uri'); 
+$token = config('personal_access_token'); 
+
 $db = new CriminalJusticeSectorDataShareClass($base_uri, $token);
 ````
 ### Store 
