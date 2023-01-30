@@ -6,7 +6,6 @@ class Institution implements Model
 {
     use IsModel;
 
-
     public function __construct()
     {
     }
