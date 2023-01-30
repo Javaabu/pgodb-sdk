@@ -9,14 +9,13 @@ class Complainant implements Model
     public function __construct(
         protected ?string $parentClass,
         protected ?string $parentId
-    )
-    {
+    ) {
     }
 
     public function selectId(string $identifier): array
     {
         return $this
-            ->addFilter("search_by_govt_id", $identifier)
+            ->addFilter('search_by_govt_id', $identifier)
             ->filter();
     }
 
