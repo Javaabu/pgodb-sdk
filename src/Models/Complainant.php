@@ -2,16 +2,9 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Complainant implements Model
+class Complainant extends NestedModel
 {
     use IsModel;
-
-    public function __construct(
-        protected ?string $parentClass,
-        protected ?string $parentId
-    )
-    {
-    }
 
     public function selectId(string $identifier): array
     {

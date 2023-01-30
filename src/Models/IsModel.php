@@ -54,7 +54,7 @@ trait IsModel
         return $this;
     }
 
-    public function filterQuery(): ?string
+    protected function filterQuery(): ?string
     {
         $endpoint = $this->getUrl();
         if (empty($this->filters)) {
@@ -102,7 +102,7 @@ trait IsModel
     }
 
 
-    public function delete()
+    public function delete() : array
     {
         $endpoint = $this->getUrl();
         return json_decode((new AuthorizedClient())->delete($endpoint));
