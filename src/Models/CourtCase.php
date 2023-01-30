@@ -1,21 +1,16 @@
 <?php
 
-namespace Javaabu\CriminalJusticeSectorDataShare\Models;
-
-use Javaabu\CriminalJusticeSectorDataShare\Http\AuthorizedClient;
+namespace Javaabu\PgoDB\Models;
 
 class CourtCase implements Model
 {
     use IsModel;
 
-    private AuthorizedClient $client;
-
-    public function __construct(AuthorizedClient $client)
+    public function __construct()
     {
-        $this->client = $client;
     }
 
-    public function urlResourceName(): string
+    public static function urlResourceName(): string
     {
         return 'court-cases';
     }

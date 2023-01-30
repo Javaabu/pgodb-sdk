@@ -1,6 +1,6 @@
 <?php
 
-namespace Javaabu\CriminalJusticeSectorDataShare\Http;
+namespace Javaabu\PgoDB\Http;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -9,20 +9,25 @@ class AuthorizedClient
 {
     private Client $client;
 
-    public function __construct(
-        protected string $baseUri,
-        protected string $accessToken)
+    public function __construct()
     {
+        // @TODO: fix this!
+        $dotenv = \Dotenv\Dotenv::createImmutable([__DIR__ ."..\..\..", __DIR__ ."..\.."]);
+        $dotenv->load();
+
+        $base_uri = $_ENV['BASE_URI'];
+        $access_token = $_ENV['API_TOKEN'];
+
         $this->client = new Client([
-            'base_uri' => $this->baseUri,
+            'base_uri' => $base_uri,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->accessToken,
+                'Authorization' => 'Bearer ' . $access_token,
                 'Content-Type' => 'application/json'
             ]
         ]);
     }
 
-    public function delete(string $endpoint)
+    public function delete(string $endpoint): bool|\Psr\Http\Message\StreamInterface|string
     {
         try {
             $response = $this->client->delete($endpoint);

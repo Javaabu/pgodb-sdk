@@ -1,94 +1,123 @@
 <?php
 
-namespace Javaabu\CriminalJusticeSectorDataShare\Models;
+namespace Javaabu\PgoDB\Models;
 
-use Javaabu\CriminalJusticeSectorDataShare\Util\UrlQuery;
+use Javaabu\PgoDB\Http\AuthorizedClient;
 
 trait IsModel
 {
+    protected array $sorts = [];
+    protected array $filters = [];
 
-    public function index(?UrlQuery $query = null): array
+    public function index(): array
     {
-        if (! $query) {
-            return $this->get()['data'];
+        $endpoint = $this->getUrl();
+
+        $this->clearAllVariables();
+
+        if ($response = (new AuthorizedClient())->get($endpoint)) {
+            return json_decode($response, true)["data"];
+        }
+        return [];
+    }
+
+    public function selectId(string $identifier): array
+    {
+        return $this
+            ->addFilter("search", $identifier)
+            ->filter();
+    }
+
+    public function filter(): array
+    {
+        if (! $endpoint = $this->filterQuery()) {
+            return [];
         }
 
-        $endpoint = $this->urlResourceName();
-        $endpoint = $query->getQuery($endpoint);
-        return $this->get($endpoint)['data'];
+        $this->clearAllVariables();
+
+        if ($response = (new AuthorizedClient())->get($endpoint)) {
+            return json_decode($response, true);
+        }
+        return [];
     }
 
-    public function indexPage(string $page): array
+    public function whereId(string $id): self
     {
-        $query = $this->queryBuilder();
-        $query->selectPage($page);
-        return $this->index($query);
+        $this->id = $id;
+        return $this;
     }
 
-    public function selectById(string $identifier): array
+    public function addFilter(string $key, string $value): self
     {
-        $query = $this->queryBuilder();
-        $query->addFilter("search", $identifier);
-        return $this->index($query);
+        $this->filters[] = "filter[$key]=$value";
+        return $this;
     }
 
-    public function deleteById(string $identifier) : array
+    public function filterQuery(): ?string
     {
-        return $this->delete($this->urlResourceName(), $identifier);
+        $endpoint = $this->getUrl();
+        if (empty($this->filters)) {
+            return $endpoint;
+        }
+        $query = implode("&", $this->filters);
+        return $endpoint . "?$query";
     }
 
-    public function updateById(string $identifier, array $data): array
+    protected function getUrl(): string
     {
-        return $this->patch($identifier, $data);
-    }
-
-    public function store(array $data) : array
-    {
-        return $this->post($data);
-    }
-
-
-    protected function queryBuilder() : UrlQuery
-    {
-        return new UrlQuery($this->urlResourceName());
-    }
-
-
-    protected function get(string $endpoint = null): array
-    {
-        if (! $endpoint) {
-            $endpoint = $this->urlResourceName();
+        $endpoint = '';
+        if (isset($this->parentId) && isset($this->parentClass)) {
+            /** @var CriminalCase $parent_class */
+            $parent_class = $this->parentClass;
+            $parent_class = $parent_class::urlResourceName();
+            $endpoint .= "$parent_class/{$this->parentId}/";
         }
 
-        if ($response = $this->client->get($endpoint)) {
+
+        if (! isset($this->id)) {
+            return $endpoint . $this->urlResourceName();
+        }
+
+        return $endpoint . $this->urlResourceName() ."/{$this->id}";
+    }
+
+
+    public function store(array $data): array
+    {
+        $endpoint = $this->getUrl();
+        if ($response = (new AuthorizedClient())->post($endpoint, $data)) {
+           return json_decode($response, true);
+        }
+        return [];
+    }
+
+    public function update(array $data): array
+    {
+        $endpoint = $this->getUrl();
+        if ($response = (new AuthorizedClient())->patch($endpoint, $data)) {
             return json_decode($response, true);
         }
         return [];
     }
 
 
-    protected function post(array $body): array
+    public function delete()
     {
-        $endpoint = $this->urlResourceName();
-        if ($response = $this->client->post($endpoint, $body)) {
-            return json_decode($response, true);
+        $endpoint = $this->getUrl();
+        return json_decode((new AuthorizedClient())->delete($endpoint));
+    }
+
+    private function clearAllVariables() : void
+    {
+        $this->sorts = [];
+        $this->filters = [];
+        $this->id = null;
+        if (isset($this->parentId)) {
+            $this->parentId = null;
         }
-        return [];
-    }
-
-    protected function patch( string $id, array $body): array
-    {
-        $endpoint = $this->urlResourceName() . "/" . $id;
-        if ($response = $this->client->patch($endpoint, $body)) {
-            return json_decode($response, true);
+        if (isset($this->parentClass)) {
+            $this->parentClass = null;
         }
-        return [];
     }
-
-    protected function delete(string $endpoint, string $id)
-    {
-        $endpoint = $this->urlResourceName() . "/" . $id;
-        return json_decode($this->client->delete($endpoint));
-    }
-
 }

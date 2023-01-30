@@ -1,22 +1,27 @@
 <?php
 
-namespace Javaabu\CriminalJusticeSectorDataShare\Models;
-
-use Javaabu\CriminalJusticeSectorDataShare\Http\AuthorizedClient;
+namespace Javaabu\PgoDB\Models;
 
 class Complainant implements Model
 {
     use IsModel;
 
-    private AuthorizedClient $client;
-
-    public function __construct(AuthorizedClient $client)
+    public function __construct(
+        protected ?string $parentClass,
+        protected ?string $parentId
+    )
     {
-        $this->client = $client;
     }
 
-    public function urlResourceName(): string
+    public function selectId(string $identifier): array
     {
-        return 'court-cases';
+        return $this
+            ->addFilter("search_by_govt_id", $identifier)
+            ->filter();
+    }
+
+    public static function urlResourceName(): string
+    {
+        return 'complainants';
     }
 }

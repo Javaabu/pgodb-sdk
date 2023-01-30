@@ -1,11 +1,11 @@
 {
-    "name": "javaabu-pvt-ltd/criminal-justice-sector-db-sdk",
+    "name": "javaabu/pgodb-sdk",
     "description": "The Criminal Justice Sector SDK is a wrapper package that allows developers to integrate their existing data infrastructure with the data-sharing platform developed by the Prosecutor General's Office.",
     "keywords": [
         "Javaabu Pvt Ltd",
-        "criminal-justice-sector-db-sdk"
+        "pgodb-sdk"
     ],
-    "homepage": "https://github.com/javaabu-pvt-ltd/criminal-justice-sector-db-sdk",
+    "homepage": "https://github.com/javaabu/pgodb-sdk",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.5"
+        "guzzlehttp/guzzle": "^7.5",
+        "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
         "pestphp/pest": "^1.20",
@@ -25,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Javaabu\\CriminalJusticeSectorDataShare\\": "src"
+            "Javaabu\\PgoDB\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Javaabu\\CriminalJusticeSectorDataShare\\Tests\\": "tests"
+            "Javaabu\\PgoDB\\Tests\\": "tests"
         }
     },
     "scripts": {

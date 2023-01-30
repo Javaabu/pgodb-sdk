@@ -1,21 +1,29 @@
 <?php
 
-namespace Javaabu\CriminalJusticeSectorDataShare\Models;
-
-use Javaabu\CriminalJusticeSectorDataShare\Http\AuthorizedClient;
+namespace Javaabu\PgoDB\Models;
 
 class CriminalCase implements Model
 {
     use IsModel;
 
-    private AuthorizedClient $client;
+    protected ?string $id;
 
-    public function __construct(AuthorizedClient $client)
+    protected Complainant $complainant;
+
+    public function __construct()
+    {}
+
+    public function complainant() : ?Complainant
     {
-        $this->client = $client;
+        if (! $this->id) {
+            return null;
+        }
+
+        $this->complainant = new Complainant(CriminalCase::class, $this->id);
+        return $this->complainant;
     }
 
-    public function urlResourceName(): string
+    public static function urlResourceName(): string
     {
         return 'criminal-cases';
     }
