@@ -1,6 +1,8 @@
 <?php
 namespace Javaabu\CriminalJusticeSectorDataShare\Models;
 
+use Javaabu\CriminalJusticeSectorDataShare\Util\UrlQuery;
+
 interface Model
 {
     public function urlResourceName() : string;
@@ -10,6 +12,8 @@ interface Model
 
     public function indexPage(string $page) : array;
 
-    public function update(string $identifier, array $data) : array;
+    public function updateById(string $identifier, array $data) : array;
+
+    public function store(array $data) : array;
 
 }

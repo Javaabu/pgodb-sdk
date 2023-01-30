@@ -2,36 +2,64 @@
 
 namespace Javaabu\CriminalJusticeSectorDataShare\Models;
 
+use Javaabu\CriminalJusticeSectorDataShare\Util\UrlQuery;
+
 trait IsModel
 {
 
-    public function index() : array
+    public function index(?UrlQuery $query = null): array
     {
-        // Will get a paginated view set to the first page by default
-        return $this->get();
+        if (! $query) {
+            return $this->get()['data'];
+        }
+
+        $endpoint = $this->urlResourceName();
+        $endpoint = $query->getQuery($endpoint);
+        return $this->get($endpoint)['data'];
     }
 
-    public function indexPage(string $page) : array
+    public function indexPage(string $page): array
     {
-        return $this->get(['page' => $page]);
+        $query = $this->queryBuilder();
+        $query->selectPage($page);
+        return $this->index($query);
     }
 
-    public function selectById(string $identifier) : array
+    public function selectById(string $identifier): array
     {
-        $endpoint = $this->urlResourceName() . '?filter[search]='. $identifier;
-        return json_decode($this->client->get($endpoint), true);
+        $query = $this->queryBuilder();
+        $query->addFilter("search", $identifier);
+        return $this->index($query);
     }
 
-    public function update(string $identifier, array $data) : array
+    public function deleteById(string $identifier) : array
     {
-        return $this->patch($data, $identifier);
+        return $this->delete($this->urlResourceName(), $identifier);
+    }
+
+    public function updateById(string $identifier, array $data): array
+    {
+        return $this->patch($identifier, $data);
+    }
+
+    public function store(array $data) : array
+    {
+        return $this->post($data);
     }
 
 
-    protected function get(array $filters = []): array
+    protected function queryBuilder() : UrlQuery
     {
-        $query = $this->prepareQueryFromFilters($filters);
-        $endpoint = $this->urlResourceName() . $query;
+        return new UrlQuery($this->urlResourceName());
+    }
+
+
+    protected function get(string $endpoint = null): array
+    {
+        if (! $endpoint) {
+            $endpoint = $this->urlResourceName();
+        }
+
         if ($response = $this->client->get($endpoint)) {
             return json_decode($response, true);
         }
@@ -48,7 +76,7 @@ trait IsModel
         return [];
     }
 
-    protected function patch(array $body, string $id): array
+    protected function patch( string $id, array $body): array
     {
         $endpoint = $this->urlResourceName() . "/" . $id;
         if ($response = $this->client->patch($endpoint, $body)) {
@@ -63,25 +91,4 @@ trait IsModel
         return json_decode($this->client->delete($endpoint));
     }
 
-    protected function prepareQueryFromFilters(array $filters = []): string
-    {
-        if (empty($filters)) {
-            return '';
-        }
-
-        $query = '?';
-        $first = true;
-        foreach ($filters as $key => $value) {
-            if ($key != 'filter') {
-                if ($first) {
-                    $query .= "$key=$value";
-                    $first = !$first;
-                } else {
-                    $query .= "&$key=$value";
-                }
-            }
-        }
-
-        return $query;
-    }
 }

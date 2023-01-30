@@ -5,7 +5,75 @@
 
 The Criminal Justice Sector DataShare SDKis a wrapper package that allows developers to integrate their existing data infrastructure with the data-sharing platform developed by the Prosecutor General's Office.
 
+## Basic Usage
 
+### Instantiation
+````
+$base_uri = "https://pgodb.javaabu.net"; 
+$token = "euiodeji32098u82390458"; 
+$db = new CriminalJusticeSectorDataShareClass($base_uri, $token);
+````
+### Store 
+````
+$sample_model = [
+  "incident_reference_number" => "5154252024",
+  "institution_reg_no" => "pgo",
+  "incident_at" => "1996-12-30T09:11:26.000000Z",
+   "lodged_at" => "1998-03-13T19:00:00.000000Z"
+];
+
+$db->criminalCase()->store($sample_model);
+````
+
+### Update 
+````
+$update_model = [
+    "institution_reg_no" => "javaabu"
+];
+
+$identifier = "43829043";
+
+$db->criminalCase()->updateById($identifier, $update_model);
+````
+### Delete 
+````
+$identifier = "43829043";
+$db->criminalCase()->deleteById($identifier);
+````
+
+### Retrieving All Models
+````
+$db->criminalCase()->index();
+````
+### Sorting
+````
+$query = $db->criminalCase()->queryBuilder();
+
+$query->addSortByAscending("incident_at");
+$query->addSortByDescending("lodged_at");
+
+$db->criminalCase()->index($query);
+````
+### Retrieve Model by Identifier
+This method is a wrapper function for logic that makes use of the simple query builder.
+````
+$identifier = "43829043";
+$db->criminalCase()->selectById($identifier);
+````
+### Retrieve Specific Page from Paginated View
+This method is a wrapper function for logic that makes use of the simple query builder. 
+````
+$page_index = 2;
+$db->criminalCase()->indexPage($page_index);
+````
+
+### Filter or Search by Custom Key
+`````
+$query = $db->criminalCase()->queryBuilder();
+
+$query->addFilter("pg_reference_number","823490");
+$db->criminalCase()->index($query);
+`````
 
 ## Testing
 
