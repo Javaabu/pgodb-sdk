@@ -2,11 +2,9 @@
 
 namespace Javaabu\CriminalJusticeSectorDataShare\Models;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Javaabu\CriminalJusticeSectorDataShare\Http\AuthorizedClient;
 
-class CriminalCase implements Model
+class Institution implements Model
 {
     use IsModel;
 
@@ -19,6 +17,6 @@ class CriminalCase implements Model
 
     public function urlResourceName(): string
     {
-        return 'criminal-cases';
+        return 'court-cases';
     }
 }

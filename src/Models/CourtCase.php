@@ -10,9 +10,9 @@ class CourtCase implements Model
 
     private AuthorizedClient $client;
 
-    public function __construct(string $baseUri, string $accessToken)
+    public function __construct(AuthorizedClient $client)
     {
-        $this->client = new AuthorizedClient($baseUri, $accessToken);
+        $this->client = $client;
     }
 
     public function urlResourceName(): string
