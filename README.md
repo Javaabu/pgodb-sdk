@@ -23,6 +23,9 @@ If you do not have an `.env` file, then be sure to create one in your project ro
 BASE_URI=
 TOKEN_API=
 ```
+*Note*
+- Check the SOP to understand how to get a token API. Use this as the `TOKEN_API`. 
+- Use the `host` parameter, defined in the API documentation, as the `BASE_URI`.
 
 ### Store Non-Nested Model
 
