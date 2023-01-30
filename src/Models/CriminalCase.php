@@ -2,8 +2,6 @@
 
 namespace Javaabu\CriminalJusticeSectorDataShare\Models;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Javaabu\CriminalJusticeSectorDataShare\Http\AuthorizedClient;
 
 class CriminalCase implements Model
