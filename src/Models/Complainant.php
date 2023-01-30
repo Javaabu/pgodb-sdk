@@ -6,7 +6,7 @@ class Complainant extends NestedModel
 {
     use IsModel;
 
-    public function selectId(string $identifier): array
+    public function selectById(string $identifier): array
     {
         return $this
             ->addFilter("search_by_govt_id", $identifier)

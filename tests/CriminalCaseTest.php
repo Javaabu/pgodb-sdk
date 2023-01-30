@@ -8,7 +8,7 @@ it('retrieves an array from (GET) `/criminal-cases/`', function () {
 
 it('can retrieve an existing model from the database', function () {
     $db = new \Javaabu\PgoDB\PgoDB();
-    $res = $db->criminalCase()->selectId('91142520112023');
+    $res = $db->criminalCase()->selectById('91142520112023');
     expect(count($res['data']))->toEqual(1);
 });
 //
@@ -18,7 +18,7 @@ it('can update an existing model identified by its id', function () {
     $db->criminalCase()->whereId('91142520112026')->update([
         'institution_reg_no' => 'JAVAAABU',
     ]);
-    $res = $db->criminalCase()->selectId('91142520112026');
+    $res = $db->criminalCase()->selectById('91142520112026');
     expect(count($res['data']))->toEqual(1);
     $this->assertEquals('javaabu', $res['data'][0]['institution']['slug']);
 });
@@ -43,14 +43,14 @@ it('can create a nested complainant in an existing criminal case model', functio
             ],
         ]
     );
-    $res = $db->criminalCase()->whereId('91142520112026')->complainant()->selectId('A169999');
+    $res = $db->criminalCase()->whereId('91142520112026')->complainant()->selectById('A169999');
     expect($res)->toBeArray();
     $this->assertEquals('Dr. Larissa Stokes', $res['data'][0]['individual']['name']);
 });
 
 it('can create a new model', function () {
     $db = new \Javaabu\PgoDB\PgoDB();
-    $res1 = $db->criminalCase()->selectId('91142520112037');
+    $res1 = $db->criminalCase()->selectById('91142520112037');
     expect(count($res1['data']))->toEqual(0);
 
     $sample_model = [
@@ -62,6 +62,6 @@ it('can create a new model', function () {
     $stored_result = $db->criminalCase()->store($sample_model);
     $this->assertEquals('91142520112037', $stored_result['incident_reference_number']);
 
-    $res2 = $db->criminalCase()->selectId('91142520112037');
+    $res2 = $db->criminalCase()->selectById('91142520112037');
     expect(count($res2['data']))->toEqual(1);
 });

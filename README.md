@@ -24,6 +24,19 @@ BASE_URI=
 TOKEN_API=
 ```
 
+### Retrieve all Models
+```php
+$pgoDb->criminalCase()->index();
+```
+### Retrieve by Id
+```php
+$pgoDb->criminalCase()->selectById($idString);
+```
+This is a wrapper for the `filter` functionality built into this package. An alternate way of doing this is as follows:
+```php
+$pgoDb->criminalCase()->addFilter("search", $idString)->filter();
+```
+However, not all models will work with `"search"`, so this alternate method is not recommended for use.
 ### Store Non-Nested Model
 
 ```php

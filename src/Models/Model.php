@@ -18,7 +18,7 @@ interface Model
 
     public function filter(): array;
 
-    public function selectId(string $identifier): array;
+    public function selectById(string $identifier): array;
 
     public function index(): array;
 }
