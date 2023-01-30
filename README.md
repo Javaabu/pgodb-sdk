@@ -15,14 +15,17 @@ Coming soon.
 $pgoDb = new PgoDB();
 ```
 
-Ensure that `TOKEN_API` and `BASE_URI` are set in your `.env` environment file.
+Ensure that `API_TOKEN` and `BASE_URI` are set in your `.env` environment file.
 
 If you do not have an `.env` file, then be sure to create one in your project root.
 
 ```apacheconf
 BASE_URI=
-TOKEN_API=
+API_TOKEN=
 ```
+*Note*
+- Check the SOP to understand how to get an API token (you may use either a personal access token or a password token). Use this as the `API_TOKEN`. 
+- Use the `host` parameter, defined in the API documentation, as the `BASE_URI`.
 
 ### Retrieve all Models
 ```php
