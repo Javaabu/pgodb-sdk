@@ -7,6 +7,7 @@ use Javaabu\PgoDB\Http\AuthorizedClient;
 trait IsModel
 {
     protected array $sorts = [];
+
     protected array $filters = [];
 
     public function index(): array
@@ -16,15 +17,16 @@ trait IsModel
         $this->clearAllVariables();
 
         if ($response = (new AuthorizedClient())->get($endpoint)) {
-            return json_decode($response, true)["data"];
+            return json_decode($response, true)['data'];
         }
+
         return [];
     }
 
     public function selectId(string $identifier): array
     {
         return $this
-            ->addFilter("search", $identifier)
+            ->addFilter('search', $identifier)
             ->filter();
     }
 
@@ -39,18 +41,21 @@ trait IsModel
         if ($response = (new AuthorizedClient())->get($endpoint)) {
             return json_decode($response, true);
         }
+
         return [];
     }
 
     public function whereId(string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
     public function addFilter(string $key, string $value): self
     {
         $this->filters[] = "filter[$key]=$value";
+
         return $this;
     }
 
@@ -60,8 +65,9 @@ trait IsModel
         if (empty($this->filters)) {
             return $endpoint;
         }
-        $query = implode("&", $this->filters);
-        return $endpoint . "?$query";
+        $query = implode('&', $this->filters);
+
+        return $endpoint."?$query";
     }
 
     protected function getUrl(): string
@@ -74,21 +80,20 @@ trait IsModel
             $endpoint .= "$parent_class/{$this->parentId}/";
         }
 
-
         if (! isset($this->id)) {
-            return $endpoint . $this->urlResourceName();
+            return $endpoint.$this->urlResourceName();
         }
 
-        return $endpoint . $this->urlResourceName() ."/{$this->id}";
+        return $endpoint.$this->urlResourceName()."/{$this->id}";
     }
-
 
     public function store(array $data): array
     {
         $endpoint = $this->getUrl();
         if ($response = (new AuthorizedClient())->post($endpoint, $data)) {
-           return json_decode($response, true);
+            return json_decode($response, true);
         }
+
         return [];
     }
 
@@ -98,17 +103,18 @@ trait IsModel
         if ($response = (new AuthorizedClient())->patch($endpoint, $data)) {
             return json_decode($response, true);
         }
+
         return [];
     }
 
-
-    public function delete() : array
+    public function delete(): array
     {
         $endpoint = $this->getUrl();
+
         return json_decode((new AuthorizedClient())->delete($endpoint));
     }
 
-    private function clearAllVariables() : void
+    private function clearAllVariables(): void
     {
         $this->sorts = [];
         $this->filters = [];

@@ -9,7 +9,7 @@ class Complainant extends NestedModel
     public function selectId(string $identifier): array
     {
         return $this
-            ->addFilter("search_by_govt_id", $identifier)
+            ->addFilter('search_by_govt_id', $identifier)
             ->filter();
     }
 
