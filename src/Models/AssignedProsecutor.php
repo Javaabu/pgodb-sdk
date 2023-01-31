@@ -2,7 +2,7 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Complainant extends NestedModel
+class AssignedProsecutor extends NestedModel
 {
     use IsModel;
 
@@ -13,8 +13,13 @@ class Complainant extends NestedModel
             ->filter();
     }
 
+    public function getIfLegalAid(bool $value = true) : array
+    {
+        return $this->addFilter('is_legal_aid', $value)->filter();
+    }
+
     public static function urlResourceName(): string
     {
-        return 'complainants';
+        return 'assigned-prosecutors';
     }
 }

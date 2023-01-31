@@ -9,7 +9,7 @@ use Javaabu\PgoDB\Models\Institution;
 
 class PgoDB
 {
-    protected static AuthorizedClient $authorizedClient;
+    protected AuthorizedClient $authorizedClient;
 
     protected CriminalCase $criminalCase;
 
@@ -17,8 +17,10 @@ class PgoDB
 
     protected Institution $institution;
 
-    public function __construct()
+    public function __construct(protected string $apiKey)
     {
+        $this->authorizedClient = new AuthorizedClient($this->apiKey);
+
         $this->criminalCase = new CriminalCase();
         $this->courtCase = new CourtCase();
         $this->institution = new Institution();
@@ -26,16 +28,19 @@ class PgoDB
 
     public function criminalCase(): ?CriminalCase
     {
+        $this->criminalCase->setClient($this->authorizedClient);
         return $this->criminalCase;
     }
 
     public function courtCase(): ?CourtCase
     {
+        $this->courtCase->setClient($this->authorizedClient);
         return $this->courtCase;
     }
 
     public function institution(): ?Institution
     {
+        $this->institution->setClient($this->authorizedClient);
         return $this->institution;
     }
 }

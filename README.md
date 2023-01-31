@@ -11,18 +11,13 @@ Coming soon.
 
 ### Initialisation
 
+The API key is taken as a single, mandatory parameter.  
+
 ```php
-$pgoDb = new PgoDB();
+$apiKey = "iK4YfZe2i1RAe22tKP4xejGKDZP ....";
+$pgoDb = new PgoDB($apiKey);
 ```
 
-Ensure that `API_TOKEN` and `BASE_URI` are set in your `.env` environment file.
-
-If you do not have an `.env` file, then be sure to create one in your project root.
-
-```apacheconf
-BASE_URI=
-API_TOKEN=
-```
 *Note*
 - Check the SOP to understand how to get an API token (you may use either a personal access token or a password token). Use this as the `API_TOKEN`. 
 - Use the `host` parameter, defined in the API documentation, as the `BASE_URI`.
@@ -110,6 +105,14 @@ $pgoDb->criminalCase()
       ->whereId("A169993")
       ->update($data);
 ```
+
+### Sorting 
+```php
+$pgoDb->criminalCase()
+      ->addSortByAsc("created_at")
+      ->addSortByDesc("updated_at")
+      ->sort();
+````
 
 ## Testing
 

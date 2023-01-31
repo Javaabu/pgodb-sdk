@@ -9,19 +9,18 @@ class AuthorizedClient
 {
     private Client $client;
 
-    public function __construct()
+    public function __construct(protected string $apiKey)
     {
         // @TODO: fix this!
         $dotenv = \Dotenv\Dotenv::createImmutable([__DIR__."..\..\..", __DIR__."..\.."]);
         $dotenv->load();
 
         $base_uri = $_ENV['BASE_URI'];
-        $access_token = $_ENV['API_TOKEN'];
 
         $this->client = new Client([
             'base_uri' => $base_uri,
             'headers' => [
-                'Authorization' => 'Bearer '.$access_token,
+                'Authorization' => 'Bearer '.$this->apiKey,
                 'Content-Type' => 'application/json',
             ],
         ]);

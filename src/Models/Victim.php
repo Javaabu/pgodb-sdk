@@ -2,7 +2,7 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Complainant extends NestedModel
+class Victim extends NestedModel
 {
     use IsModel;
 
@@ -15,6 +15,6 @@ class Complainant extends NestedModel
 
     public static function urlResourceName(): string
     {
-        return 'complainants';
+        return 'victims';
     }
 }
