@@ -10,7 +10,7 @@ class CrimeType implements Model
     {
     }
 
-    public function selectById(string $identifier) : array
+    public function selectById(string $identifier): array
     {
         return $this->addFilter('slug', $identifier)->filter();
     }

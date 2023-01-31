@@ -13,7 +13,7 @@ class Defendant extends NestedModel
             ->filter();
     }
 
-    public function selectByServiceNumber(string $identifier) : array
+    public function selectByServiceNumber(string $identifier): array
     {
         return $this->addFilter('service_number', $identifier)->filter();
     }

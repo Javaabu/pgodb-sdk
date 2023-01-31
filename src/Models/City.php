@@ -1,4 +1,5 @@
 <?php
+
 namespace Javaabu\PgoDB\Models;
 
 class City implements Model
