@@ -1,8 +1,7 @@
 <?php
-
 namespace Javaabu\PgoDB\Models;
 
-class Detention extends NestedModel
+class City implements Model
 {
     use IsModel;
 
@@ -12,6 +11,6 @@ class Detention extends NestedModel
 
     public static function urlResourceName(): string
     {
-        return 'detentions';
+        return 'cities';
     }
 }

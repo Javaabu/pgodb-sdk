@@ -19,7 +19,7 @@ trait IsModel
         $this->clearAllVariables();
 
         if ($response = $this->authorizedClient->get($endpoint)) {
-            return json_decode($response, true)['data'];
+            return json_decode($response, true);
         }
 
         return [];
@@ -67,7 +67,7 @@ trait IsModel
         return $this;
     }
 
-    public function addFilter(string $key, string ...$value): self
+    public function addFilter(string $key, ?string ...$value): self
     {
         $query_value = implode(",", $value);
         $this->filters[] = "filter[$key]=$query_value";

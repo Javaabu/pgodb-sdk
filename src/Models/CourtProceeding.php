@@ -2,16 +2,12 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Detention extends NestedModel
+class CourtProceeding extends NestedModel
 {
     use IsModel;
 
-    public function __construct()
-    {
-    }
-
     public static function urlResourceName(): string
     {
-        return 'detentions';
+        return 'court-proceedings';
     }
 }
