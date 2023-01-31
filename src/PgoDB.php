@@ -29,18 +29,21 @@ class PgoDB
     public function criminalCase(): ?CriminalCase
     {
         $this->criminalCase->setClient($this->authorizedClient);
+
         return $this->criminalCase;
     }
 
     public function courtCase(): ?CourtCase
     {
         $this->courtCase->setClient($this->authorizedClient);
+
         return $this->courtCase;
     }
 
     public function institution(): ?Institution
     {
         $this->institution->setClient($this->authorizedClient);
+
         return $this->institution;
     }
 }
