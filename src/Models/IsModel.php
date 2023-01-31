@@ -6,10 +6,10 @@ use Javaabu\PgoDB\Http\AuthorizedClient;
 
 trait IsModel
 {
-
     private AuthorizedClient $authorizedClient;
 
     protected array $sorts = [];
+
     protected array $filters = [];
 
     public function index(): array
@@ -32,7 +32,7 @@ trait IsModel
             ->filter();
     }
 
-    public function sort() : array
+    public function sort(): array
     {
         if (! $endpoint = $this->sortQuery()) {
             return [];
@@ -47,7 +47,7 @@ trait IsModel
 
     public function filter(): array
     {
-        if (!$endpoint = $this->filterQuery()) {
+        if (! $endpoint = $this->filterQuery()) {
             return [];
         }
 
@@ -69,34 +69,35 @@ trait IsModel
 
     public function addFilter(string $key, ?string ...$value): self
     {
-        $query_value = implode(",", $value);
+        $query_value = implode(',', $value);
         $this->filters[] = "filter[$key]=$query_value";
 
         return $this;
     }
 
-    public function addSortByAsc(string $key) : self
+    public function addSortByAsc(string $key): self
     {
         $this->sorts[] = $key;
 
         return $this;
     }
 
-    public function addSortByDesc(string $key) : self
+    public function addSortByDesc(string $key): self
     {
         $this->sorts[] = "-$key";
 
         return $this;
     }
 
-    protected function sortQuery() : ?string
+    protected function sortQuery(): ?string
     {
         $endpoint = $this->getUrl();
         if (empty($this->sorts)) {
             return $endpoint;
         }
         $query = implode(',', $this->sorts);
-        return $endpoint . "?sort=$query";
+
+        return $endpoint."?sort=$query";
     }
 
     protected function filterQuery(): ?string
@@ -106,7 +107,8 @@ trait IsModel
             return $endpoint;
         }
         $query = implode('&', $this->filters);
-        return $endpoint ."?". $query;
+
+        return $endpoint.'?'.$query;
     }
 
     protected function getUrl(): string
@@ -119,11 +121,11 @@ trait IsModel
             $endpoint .= "$parent_class/{$this->parentId}/";
         }
 
-        if (!isset($this->id)) {
-            return $endpoint . $this->urlResourceName();
+        if (! isset($this->id)) {
+            return $endpoint.$this->urlResourceName();
         }
 
-        return $endpoint . $this->urlResourceName() . "/{$this->id}";
+        return $endpoint.$this->urlResourceName()."/{$this->id}";
     }
 
     public function store(array $data): array

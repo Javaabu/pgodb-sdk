@@ -13,7 +13,7 @@ class AssignedLawyer extends NestedModel
             ->filter();
     }
 
-    public function getIfLegalAid(bool $value = true) : array
+    public function getIfLegalAid(bool $value = true): array
     {
         return $this->addFilter('is_legal_aid', $value)->filter();
     }
