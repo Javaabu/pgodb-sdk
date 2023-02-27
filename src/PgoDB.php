@@ -3,21 +3,18 @@
 namespace Javaabu\PgoDB;
 
 use Javaabu\PgoDB\Http\AuthorizedClient;
-use Javaabu\PgoDB\Models\Action;
-use Javaabu\PgoDB\Models\AssignedJudge;
-use Javaabu\PgoDB\Models\AssignedLawyer;
-use Javaabu\PgoDB\Models\AssignedProsecutor;
 use Javaabu\PgoDB\Models\CourtCase;
 use Javaabu\PgoDB\Models\CriminalCase;
 use Javaabu\PgoDB\Models\Institution;
-use Javaabu\PgoDB\Models\Model;
 
 class PgoDB
 {
     protected AuthorizedClient $authorizedClient;
 
     protected CriminalCase $criminalCase;
+
     protected CourtCase $courtCase;
+
     protected Institution $institution;
 
     public function __construct(string $apiKey, string $baseUri)
@@ -32,6 +29,7 @@ class PgoDB
     protected function initializeModel(string $modelName)
     {
         $this->$modelName->setClient($this->authorizedClient);
+
         return $this->$modelName;
     }
 
@@ -49,5 +47,4 @@ class PgoDB
     {
         return $this->initializeModel(__FUNCTION__);
     }
-
 }

@@ -9,11 +9,14 @@ class CriminalCase implements Model
     protected ?string $id;
 
     protected Complainant $complainant;
-    protected AssignedLawyer $assignedLawyer;
-    protected AssignedProsecutor $assignedProsecutor;
-    protected Action $action;
-    protected Recommendation $recommendation;
 
+    protected AssignedLawyer $assignedLawyer;
+
+    protected AssignedProsecutor $assignedProsecutor;
+
+    protected Action $action;
+
+    protected Recommendation $recommendation;
 
     public function __construct()
     {
@@ -21,13 +24,14 @@ class CriminalCase implements Model
 
     protected function initializeNestedModel(string $className, string $classInstance): ?NestedModel
     {
-        if (!$this->id) {
+        if (! $this->id) {
             return null;
         }
 
         /** @var NestedModel $classInstance */
         $this->$classInstance = new $className(CriminalCase::class, $this->id);
         $this->$classInstance->setClient($this->authorizedClient);
+
         return $this->$classInstance;
     }
 
@@ -51,7 +55,7 @@ class CriminalCase implements Model
         return $this->initializeNestedModel(Recommendation::class, __FUNCTION__);
     }
 
-    public function action() : ?NestedModel
+    public function action(): ?NestedModel
     {
         return $this->initializeNestedModel(Action::class, __FUNCTION__);
     }
