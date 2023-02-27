@@ -20,9 +20,9 @@ class PgoDB
     protected CourtCase $courtCase;
     protected Institution $institution;
 
-    public function __construct(protected string $apiKey)
+    public function __construct(string $apiKey, string $baseUri)
     {
-        $this->authorizedClient = new AuthorizedClient($this->apiKey);
+        $this->authorizedClient = new AuthorizedClient($apiKey, $baseUri);
 
         $this->criminalCase = new CriminalCase();
         $this->courtCase = new CourtCase();

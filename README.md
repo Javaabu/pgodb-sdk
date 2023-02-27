@@ -15,7 +15,8 @@ The API key is taken as a single, mandatory parameter.
 
 ```php
 $apiKey = "iK4YfZe2i1RAe22tKP4xejGKDZP ....";
-$pgoDb = new PgoDB($apiKey);
+$baseUri = "http://pgodb.test/api/v1/"
+$pgoDb = new PgoDB($apiKey, $baseUri);
 ```
 
 *Note*
