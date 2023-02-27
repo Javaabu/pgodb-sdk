@@ -14,7 +14,7 @@ class AuthorizedClient
         $this->client = new Client([
             'base_uri' => $baseUri,
             'headers' => [
-                'Authorization' => 'Bearer ' . $apiKey,
+                'Authorization' => 'Bearer '.$apiKey,
                 'Content-Type' => 'application/json',
             ],
         ]);
@@ -27,7 +27,7 @@ class AuthorizedClient
             if ($response->getStatusCode() != 200) {
                 return json_encode([
                     'errors' => [
-                        'message' => 'An error occurred in DELETE . ' . $response->getBody(),
+                        'message' => 'An error occurred in DELETE . '.$response->getBody(),
                         'status' => $response->getStatusCode(),
                     ],
                 ]);
@@ -52,7 +52,7 @@ class AuthorizedClient
             if ($response->getStatusCode() != 200) {
                 return json_encode([
                     'errors' => [
-                        'message' => 'An error occurred in PATCH. ' . $response->getBody(),
+                        'message' => 'An error occurred in PATCH. '.$response->getBody(),
                         'status' => $response->getStatusCode(),
                     ],
                 ]);
@@ -78,7 +78,7 @@ class AuthorizedClient
                 return json_encode(
                     [
                         'errors' => [
-                            'message' => 'An error occurred in POST. ' . $response->getBody(),
+                            'message' => 'An error occurred in POST. '.$response->getBody(),
                             'status' => $response->getStatusCode(),
                         ],
                     ]);
@@ -102,7 +102,7 @@ class AuthorizedClient
             if ($response->getStatusCode() != 200) {
                 return json_encode([
                     'errors' => [
-                        'message' => 'An error occurred in GET. ' . $response->getBody(),
+                        'message' => 'An error occurred in GET. '.$response->getBody(),
                         'status' => $response->getStatusCode(),
                     ],
                 ]);
