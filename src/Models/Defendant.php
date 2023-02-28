@@ -36,7 +36,7 @@ class Defendant extends NestedModel
         return 'defendants';
     }
 
-    public function defendantCharge() : ?NestedModel
+    public function defendantCharge(): ?NestedModel
     {
         return $this->initializeNestedModel(DefendantCharge::class, __FUNCTION__);
     }
