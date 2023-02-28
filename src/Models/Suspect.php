@@ -26,7 +26,7 @@ class Suspect extends NestedModel
             ->filter();
     }
 
-    public function suspectCharge() : ?NestedModel
+    public function suspectCharge(): ?NestedModel
     {
         return $this->initializeNestedModel(SuspectCharge::class, __FUNCTION__);
     }

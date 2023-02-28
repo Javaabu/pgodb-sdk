@@ -3,10 +3,7 @@
 namespace Javaabu\PgoDB;
 
 use Javaabu\PgoDB\Http\AuthorizedClient;
-use Javaabu\PgoDB\Models\Action;
 use Javaabu\PgoDB\Models\ActionType;
-use Javaabu\PgoDB\Models\AssignedJudge;
-use Javaabu\PgoDB\Models\AssignedLawyer;
 use Javaabu\PgoDB\Models\CaseType;
 use Javaabu\PgoDB\Models\City;
 use Javaabu\PgoDB\Models\Company;
@@ -15,36 +12,49 @@ use Javaabu\PgoDB\Models\CourtCase;
 use Javaabu\PgoDB\Models\CourtOrderType;
 use Javaabu\PgoDB\Models\CrimeType;
 use Javaabu\PgoDB\Models\CriminalCase;
-use Javaabu\PgoDB\Models\DefendantCharge;
-use Javaabu\PgoDB\Models\Detention;
 use Javaabu\PgoDB\Models\EducationalLevel;
 use Javaabu\PgoDB\Models\Individual;
 use Javaabu\PgoDB\Models\Institution;
 use Javaabu\PgoDB\Models\Judge;
 use Javaabu\PgoDB\Models\Lawyer;
 use Javaabu\PgoDB\Models\State;
-use Javaabu\PgoDB\Models\Victim;
 use Javaabu\PgoDB\Models\VictimCategory;
 
 class PgoDB
 {
     protected AuthorizedClient $authorizedClient;
+
     protected CriminalCase $criminalCase;
+
     protected CourtCase $courtCase;
+
     protected Institution $institution;
+
     protected CrimeType $crimeType;
+
     protected CaseType $caseType;
+
     protected CourtOrderType $courtOrderType;
+
     protected ActionType $actionType;
+
     protected Company $company;
+
     protected EducationalLevel $educationalLevel;
+
     protected VictimCategory $victimCategory;
+
     // individuals
     protected Individual $individual;
+
     protected Lawyer $lawyer;
+
     protected Judge $judge;
+
     protected City $city;
+
     protected State $state;
+
     protected Country $country;
 
     public function __construct(string $apiKey, string $baseUri)
@@ -66,7 +76,6 @@ class PgoDB
         $this->state = new State();
         $this->lawyer = new Lawyer();
         $this->judge = new Judge();
-
     }
 
     protected function initializeModel(string $modelName)
@@ -91,70 +100,68 @@ class PgoDB
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function crimeType() : ?CrimeType
+    public function crimeType(): ?CrimeType
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function caseType() : ?CaseType
+    public function caseType(): ?CaseType
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function actionType() : ?ActionType
+    public function actionType(): ?ActionType
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function company() : ?Company
+    public function company(): ?Company
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function individual() : ?Individual
+    public function individual(): ?Individual
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function judge() : ?Judge
+    public function judge(): ?Judge
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function lawyer() : ?Lawyer
+    public function lawyer(): ?Lawyer
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function educationalLevel() : ?EducationalLevel
+    public function educationalLevel(): ?EducationalLevel
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function victimCategory() : ?VictimCategory
+    public function victimCategory(): ?VictimCategory
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function courtOrderType() : ?CourtOrderType
+    public function courtOrderType(): ?CourtOrderType
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function city() : ?City
+    public function city(): ?City
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function country() : ?Country
+    public function country(): ?Country
     {
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function state() : ?State
+    public function state(): ?State
     {
         return $this->initializeModel(__FUNCTION__);
     }
-
-
 }

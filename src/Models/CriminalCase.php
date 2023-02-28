@@ -55,7 +55,7 @@ class CriminalCase implements Model
         return $this->initializeNestedModel(Recommendation::class, __FUNCTION__);
     }
 
-    public function courtOrder() : ?NestedModel
+    public function courtOrder(): ?NestedModel
     {
         return $this->initializeNestedModel(CourtOrder::class, __FUNCTION__);
     }
@@ -65,16 +65,15 @@ class CriminalCase implements Model
         return $this->initializeNestedModel(Action::class, __FUNCTION__);
     }
 
-    public function victim() : ?NestedModel
+    public function victim(): ?NestedModel
     {
         return $this->initializeNestedModel(Victim::class, __FUNCTION__);
     }
 
-    public function suspect() : ?NestedModel
+    public function suspect(): ?NestedModel
     {
         return $this->initializeNestedModel(Suspect::class, __FUNCTION__);
     }
-
 
     public static function urlResourceName(): string
     {

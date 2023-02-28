@@ -28,7 +28,7 @@ class CourtCase implements Model
         return $this->initializeNestedModel(AssignedProsecutor::class, __FUNCTION__);
     }
 
-    public function assignedJudge() : ?NestedModel
+    public function assignedJudge(): ?NestedModel
     {
         return $this->initializeNestedModel(AssignedJudge::class, __FUNCTION__);
     }
@@ -48,27 +48,27 @@ class CourtCase implements Model
         return $this->initializeNestedModel(Action::class, __FUNCTION__);
     }
 
-    public function courtProceeding() : ?NestedModel
+    public function courtProceeding(): ?NestedModel
     {
         return $this->initializeNestedModel(CourtProceeding::class, __FUNCTION__);
     }
 
-    public function defendant() : ?NestedModel
+    public function defendant(): ?NestedModel
     {
         return $this->initializeNestedModel(Defendant::class, __FUNCTION__);
     }
 
-    public function courtOrder() : ?NestedModel
+    public function courtOrder(): ?NestedModel
     {
         return $this->initializeNestedModel(CourtOrder::class, __FUNCTION__);
     }
 
-    public function detention() : ?NestedModel
+    public function detention(): ?NestedModel
     {
         return $this->initializeNestedModel(Detention::class, __FUNCTION__);
     }
 
-    public function victim() : ?NestedModel
+    public function victim(): ?NestedModel
     {
         return $this->initializeNestedModel(Victim::class, __FUNCTION__);
     }
