@@ -19,7 +19,7 @@ class State extends NestedModel
         return $this->$classInstance;
     }
 
-    public function city() : ?NestedModel
+    public function city(): ?NestedModel
     {
         return $this->initializeNestedModel(City::class, __FUNCTION__);
     }

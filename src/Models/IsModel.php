@@ -184,5 +184,4 @@ trait IsModel
 
         return $this->$modelName;
     }
-
 }
