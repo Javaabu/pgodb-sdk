@@ -2,7 +2,7 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Action implements Model
+class VictimCategory implements Model
 {
     use IsModel;
 
@@ -12,6 +12,6 @@ class Action implements Model
 
     public static function urlResourceName(): string
     {
-        return 'actions';
+        return 'victim-categories';
     }
 }

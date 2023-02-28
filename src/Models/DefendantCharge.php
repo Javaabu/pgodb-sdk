@@ -2,16 +2,12 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Action implements Model
+class DefendantCharge extends NestedModel
 {
     use IsModel;
 
-    public function __construct()
-    {
-    }
-
     public static function urlResourceName(): string
     {
-        return 'actions';
+        return 'defendant-charges';
     }
 }
