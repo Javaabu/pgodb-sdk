@@ -138,7 +138,6 @@ class PgoDB
         return $this->initializeModel(__FUNCTION__);
     }
 
-
     public function country() : ?Country
     {
         return $this->initializeModel(__FUNCTION__);
