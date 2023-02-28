@@ -43,8 +43,6 @@ class PgoDB
     protected Individual $individual;
     protected Lawyer $lawyer;
     protected Judge $judge;
-    protected City $city;
-    protected State $state;
     protected Country $country;
 
     public function __construct(string $apiKey, string $baseUri)
@@ -56,14 +54,13 @@ class PgoDB
         $this->institution = new Institution();
         $this->crimeType = new CrimeType();
         $this->caseType = new CaseType();
+        $this->courtOrderType = new CourtOrderType();
         $this->actionType = new ActionType();
         $this->company = new Company();
         $this->individual = new Individual();
         $this->educationalLevel = new EducationalLevel();
         $this->victimCategory = new VictimCategory();
-        $this->city = new City();
         $this->country = new Country();
-        $this->state = new State();
         $this->lawyer = new Lawyer();
         $this->judge = new Judge();
 
