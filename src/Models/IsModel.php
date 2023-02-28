@@ -177,4 +177,12 @@ trait IsModel
     {
         return $this->authorizedClient;
     }
+
+    protected function initializeModel(string $modelName)
+    {
+        $this->$modelName->setClient($this->authorizedClient);
+
+        return $this->$modelName;
+    }
+
 }

@@ -2,13 +2,9 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class City implements Model
+class City extends NestedModel
 {
     use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

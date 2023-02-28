@@ -141,17 +141,8 @@ class PgoDB
         return $this->initializeModel(__FUNCTION__);
     }
 
-    public function city() : ?City
-    {
-        return $this->initializeModel(__FUNCTION__);
-    }
 
     public function country() : ?Country
-    {
-        return $this->initializeModel(__FUNCTION__);
-    }
-
-    public function state() : ?State
     {
         return $this->initializeModel(__FUNCTION__);
     }

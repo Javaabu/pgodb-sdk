@@ -10,6 +10,13 @@ class Country implements Model
     {
     }
 
+
+    public function state() : ?State
+    {
+        return $this->initializeModel(__FUNCTION__);
+    }
+
+
     public static function urlResourceName(): string
     {
         return 'countries';
