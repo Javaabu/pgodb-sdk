@@ -25,11 +25,12 @@ abstract class Model
         $options = $this->getQueryParams();
         if ($this->get_one_per_page) {
             $options += [
-                'per_page' => 1
+                'per_page' => 1,
             ];
         }
         if ($response = $this->authorizedClient->get($endpoint, $options)) {
             $this->clearAllVariables();
+
             return json_decode($response, true);
         }
 
@@ -38,25 +39,20 @@ abstract class Model
 
     /**
      * Should return a single item
-     *
-     * @param string $id
-     * @return array
      */
     public function find(string $id): array
     {
         $this->get_one_per_page = true;
         $data = $this->addFilter('search', $id)->get();
-        if (array_key_exists('data', $data) && !empty($data['data'])) {
+        if (array_key_exists('data', $data) && ! empty($data['data'])) {
             return $data['data'][0];
         }
+
         return [];
     }
 
     /**
      * Sends a delete request and returns either true or false
-     *
-     * @param string $id
-     * @return bool
      */
     public function delete(string $id): bool
     {
@@ -64,15 +60,16 @@ abstract class Model
         $delete_url = $this->makeUri();
         if ($this->authorizedClient->delete($delete_url)) {
             $this->clearAllVariables();
+
             return true;
         }
+
         return false;
     }
 
     /**
      * Stores a new object
      *
-     * @param array $data
      * @return void
      */
     public function store(array $data): ?array
@@ -80,6 +77,7 @@ abstract class Model
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->post($endpoint, $data)) {
             $this->clearAllVariables();
+
             return json_decode($response, true);
         }
 
@@ -89,7 +87,6 @@ abstract class Model
     /**
      * Update the record
      *
-     * @param array $data
      * @return void
      */
     public function update(array $data): ?array
@@ -97,12 +94,12 @@ abstract class Model
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->patch($endpoint, $data)) {
             $this->clearAllVariables();
+
             return json_decode($response, true);
         }
 
         return null;
     }
-
 
     public function whereId(string $id): self
     {
@@ -118,12 +115,11 @@ abstract class Model
         }
 
         $this->filters = [
-            $key => $value
+            $key => $value,
         ];
 
         return $this;
     }
-
 
     public function addSort(string $key): self
     {
@@ -142,29 +138,26 @@ abstract class Model
     protected function getQueryParams(): ?array
     {
         $queryParams = [];
-        if (sizeof($this->sorts) > 0) {
+        if (count($this->sorts) > 0) {
             $sort_value = implode(',', array_merge($this->sorts));
             $queryParams[] = [
-                'sort' => $sort_value
+                'sort' => $sort_value,
             ];
         }
 
-        if (sizeof($this->filters) > 0) {
+        if (count($this->filters) > 0) {
             $queryParams['filter'] = $this->filters;
         }
 
-        if (sizeof($queryParams) == 0) {
+        if (count($queryParams) == 0) {
             return [];
         }
 
         return ['query' => $queryParams];
     }
 
-
     /**
      * Prepare an API request
-     *
-     * @return string
      */
     protected function makeUri(): string
     {
@@ -176,11 +169,11 @@ abstract class Model
             $endpoint .= "$parent_class/{$this->cleanStringForUri($this->parentId)}/";
         }
 
-        if (!isset($this->id)) {
-            return $endpoint . $this->urlResourceName();
+        if (! isset($this->id)) {
+            return $endpoint.$this->urlResourceName();
         }
 
-        return $endpoint . $this->urlResourceName() . "/{$this->cleanStringForUri($this->id)}";
+        return $endpoint.$this->urlResourceName()."/{$this->cleanStringForUri($this->id)}";
     }
 
     private function clearAllVariables(): void
@@ -207,5 +200,4 @@ abstract class Model
     {
         return urlencode(urlencode($value));
     }
-
 }
