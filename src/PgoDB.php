@@ -31,6 +31,7 @@ class PgoDB
     {
         $criminal_case = new CriminalCase();
         $criminal_case->setClient($this->authorizedClient);
+
         return $criminal_case;
     }
 
@@ -38,6 +39,7 @@ class PgoDB
     {
         $court_case = new CourtCase();
         $court_case->setClient($this->authorizedClient);
+
         return $court_case;
     }
 
@@ -45,6 +47,7 @@ class PgoDB
     {
         $institution = new Institution();
         $institution->setClient($this->authorizedClient);
+
         return $institution;
     }
 
@@ -52,20 +55,23 @@ class PgoDB
     {
         $crime_type = new CrimeType();
         $crime_type->setClient($this->authorizedClient);
+
         return $crime_type;
     }
 
     public function caseType(): ?CaseType
     {
-       $case_type = new CaseType();
-       $case_type->setClient($this->authorizedClient);
-       return $case_type;
+        $case_type = new CaseType();
+        $case_type->setClient($this->authorizedClient);
+
+        return $case_type;
     }
 
     public function actionType(): ?ActionType
     {
         $action_type = new ActionType();
         $action_type->setClient($this->authorizedClient);
+
         return $action_type;
     }
 
@@ -73,6 +79,7 @@ class PgoDB
     {
         $company = new Company();
         $company->setClient($this->authorizedClient);
+
         return $company;
     }
 
@@ -80,6 +87,7 @@ class PgoDB
     {
         $individual = new Individual();
         $individual->setClient($this->authorizedClient);
+
         return $individual;
     }
 
@@ -87,6 +95,7 @@ class PgoDB
     {
         $judge = new Judge();
         $judge->setClient($this->authorizedClient);
+
         return $judge;
     }
 
@@ -94,6 +103,7 @@ class PgoDB
     {
         $lawyer = new Lawyer();
         $lawyer->setClient($this->authorizedClient);
+
         return $lawyer;
     }
 
@@ -101,6 +111,7 @@ class PgoDB
     {
         $educational_level = new EducationalLevel();
         $educational_level->setClient($this->authorizedClient);
+
         return $educational_level;
     }
 
@@ -108,6 +119,7 @@ class PgoDB
     {
         $victim_category = new VictimCategory();
         $victim_category->setClient($this->authorizedClient);
+
         return $victim_category;
     }
 
@@ -115,6 +127,7 @@ class PgoDB
     {
         $court_order_type = new CourtOrderType();
         $court_order_type->setClient($this->authorizedClient);
+
         return $court_order_type;
     }
 
@@ -122,6 +135,7 @@ class PgoDB
     {
         $country = new Country();
         $country->setClient($this->authorizedClient);
+
         return $country;
     }
 }

@@ -8,45 +8,49 @@ class CriminalCase extends Model
 
     public function assignedProsecutor(): ?AssignedProsecutor
     {
-        if (!$this->id) {
+        if (! $this->id) {
             return null;
         }
 
         $assigned_prosecutor = new AssignedProsecutor(CriminalCase::class, $this->id);
         $assigned_prosecutor->setClient($this->authorizedClient);
+
         return $assigned_prosecutor;
     }
 
     public function assignedLawyer(): ?AssignedLawyer
     {
-        if (!$this->id) {
+        if (! $this->id) {
             return null;
         }
 
         $assigned_lawyer = new AssignedLawyer(CriminalCase::class, $this->id);
         $assigned_lawyer->setClient($this->authorizedClient);
+
         return $assigned_lawyer;
     }
 
     public function complainant(): ?Complainant
     {
-        if (!$this->id) {
+        if (! $this->id) {
             return null;
         }
 
         $complainant = new Complainant(CriminalCase::class, $this->id);
         $complainant->setClient($this->authorizedClient);
+
         return $complainant;
     }
 
     public function recommendation(): ?Recommendation
     {
-        if (!$this->id) {
+        if (! $this->id) {
             return null;
         }
 
         $recommendation = new Recommendation(CriminalCase::class, $this->id);
         $recommendation->setClient($this->authorizedClient);
+
         return $recommendation;
     }
 
@@ -58,6 +62,7 @@ class CriminalCase extends Model
 
         $court_order = new CourtOrder(CriminalCase::class, $this->id);
         $court_order->setClient($this->authorizedClient);
+
         return $court_order;
     }
 
@@ -69,6 +74,7 @@ class CriminalCase extends Model
 
         $action = new Action();
         $action->setClient($this->authorizedClient);
+
         return $action;
     }
 
@@ -80,6 +86,7 @@ class CriminalCase extends Model
 
         $victim = new Victim(CriminalCase::class, $this->id);
         $victim->setClient($this->authorizedClient);
+
         return $victim;
     }
 
@@ -91,6 +98,7 @@ class CriminalCase extends Model
 
         $suspect = new Suspect(CriminalCase::class, $this->id);
         $suspect->setClient($this->authorizedClient);
+
         return $suspect;
     }
 

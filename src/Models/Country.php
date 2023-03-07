@@ -10,6 +10,7 @@ class Country extends Model
     {
         $state = new State(Country::class, $this->id);
         $state->setClient($this->authorizedClient);
+
         return $state;
     }
 

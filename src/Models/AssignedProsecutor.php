@@ -4,7 +4,7 @@ namespace Javaabu\PgoDB\Models;
 
 class AssignedProsecutor extends NestedModel
 {
-    public function selectById(string  $identifier,
+    public function selectById(string $identifier,
                                ?string $individual_type = null,
                                ?string $country_code = null): array
     {
