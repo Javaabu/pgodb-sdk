@@ -4,18 +4,18 @@ namespace Javaabu\PgoDB\Models;
 
 class Defendant extends NestedModel
 {
-    public function selectById(string $identifier,
+    public function find(string $identifier,
                                ?string $individual_type = null,
                                ?string $country_code = null): array
     {
         return $this
             ->addFilter('search_by_govt_id', $identifier, $individual_type, $country_code)
-            ->filter();
+            ->get();
     }
 
     public function selectByServiceNumber(string $identifier): array
     {
-        return $this->addFilter('service_number', $identifier)->filter();
+        return $this->addFilter('service_number', $identifier)->get();
     }
 
     public static function urlResourceName(): string

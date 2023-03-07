@@ -25,17 +25,17 @@ $pgoDb = new PgoDB($apiKey, $baseUri);
 
 ### Retrieve all Models
 ```php
-$pgoDb->criminalCase()->index();
+$pgoDb->criminalCase()->get();
 ```
 ### Retrieve by Id
 ```php
-$pgoDb->criminalCase()->selectById($idString);
+$pgoDb->criminalCase()->find($idString);
 ```
 This is a wrapper for the `filter` functionality built into this package. An alternate way of doing this is as follows:
 ```php
-$pgoDb->criminalCase()->addFilter("search", $idString)->filter();
+$pgoDb->criminalCase()->addFilter("search", $idString)->get();
 ```
-However, not all models will work with `"search"`, so this alternate method is not recommended for use.
+
 ### Store Non-Nested Model
 
 ```php
@@ -110,10 +110,20 @@ $pgoDb->criminalCase()
 ### Sorting 
 ```php
 $pgoDb->criminalCase()
-      ->addSortByAsc("created_at")
+      ->addSort("created_at")
       ->addSortByDesc("updated_at")
-      ->sort();
+      ->get()
 ````
+
+## Ending Functions
+The ending functions of each of these chained functions are defined as follows. 
+The actual API request will be sent once these ending functions are called at the end of the chain.
+
+-   `get()` Should return a list of items, 
+-   `find($id)` Should return a single item,
+-   `delete($id)` Sends a delete request and returns true or false,
+-   `store($data)` Returns the newly stored record,
+-   `update($data)` Returns the updated record.
 
 ## Testing
 

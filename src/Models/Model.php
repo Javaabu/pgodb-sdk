@@ -28,7 +28,6 @@ abstract class Model
                 'per_page' => 1
             ];
         }
-
         if ($response = $this->authorizedClient->get($endpoint, $options)) {
             $this->clearAllVariables();
             return json_decode($response, true);
@@ -43,7 +42,7 @@ abstract class Model
      * @param string $id
      * @return array
      */
-    public function find(string $id) : array
+    public function find(string $id): array
     {
         $this->get_one_per_page = true;
         $data = $this->addFilter('search', $id)->get();
@@ -76,7 +75,7 @@ abstract class Model
      * @param array $data
      * @return void
      */
-    public function store(array $data) : ?array
+    public function store(array $data): ?array
     {
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->post($endpoint, $data)) {
@@ -93,7 +92,7 @@ abstract class Model
      * @param array $data
      * @return void
      */
-    public function update(array $data) : ?array
+    public function update(array $data): ?array
     {
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->patch($endpoint, $data)) {
@@ -112,8 +111,12 @@ abstract class Model
         return $this;
     }
 
-    public function addFilter(string $key, ?string $value): self
+    public function addFilter(string $key, ?string ...$value): self
     {
+        if (is_array($value)) {
+            $value = implode(',', array_merge($value));
+        }
+
         $this->filters = [
             $key => $value
         ];
@@ -200,7 +203,7 @@ abstract class Model
         $this->authorizedClient = $client;
     }
 
-    private function cleanStringForUri(string $value) : string
+    private function cleanStringForUri(string $value): string
     {
         return urlencode(urlencode($value));
     }

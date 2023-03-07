@@ -4,9 +4,9 @@ namespace Javaabu\PgoDB\Models;
 
 class CaseType extends Model
 {
-    public function selectById(string $identifier): array
+    public function find(string $identifier): array
     {
-        return $this->addFilter('slug', $identifier)->filter();
+        return $this->addFilter('slug', $identifier)->get();
     }
 
     public static function urlResourceName(): string
