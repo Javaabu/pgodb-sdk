@@ -22,7 +22,7 @@ class PgoDB
 {
     protected AuthorizedClient $authorizedClient;
 
-    public function __construct(string $apiKey, string $baseUri = 'https://pgodb.javaabu.net')
+    public function __construct(string $apiKey, string $baseUri = 'http://pgodb.test/api/v1/')
     {
         $this->authorizedClient = new AuthorizedClient($apiKey, $baseUri);
     }

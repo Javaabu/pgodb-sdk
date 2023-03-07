@@ -38,14 +38,19 @@ abstract class Model
     }
 
     /**
-     * Should return a single item.
+     * Should return a single item
      *
      * @param string $id
+     * @return array
      */
-    public function find(string $id)
+    public function find(string $id) : array
     {
         $this->get_one_per_page = true;
-        return $this->addFilter('search', $id)->get(false);
+        $data = $this->addFilter('search', $id)->get();
+        if (array_key_exists('data', $data) && !empty($data['data'])) {
+            return $data['data'][0];
+        }
+        return [];
     }
 
     /**
@@ -59,6 +64,7 @@ abstract class Model
         $this->id = $id;
         $delete_url = $this->makeUri();
         if ($this->authorizedClient->delete($delete_url)) {
+            $this->clearAllVariables();
             return true;
         }
         return false;
@@ -74,6 +80,7 @@ abstract class Model
     {
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->post($endpoint, $data)) {
+            $this->clearAllVariables();
             return json_decode($response, true);
         }
 
@@ -90,6 +97,7 @@ abstract class Model
     {
         $endpoint = $this->makeUri();
         if ($response = $this->authorizedClient->patch($endpoint, $data)) {
+            $this->clearAllVariables();
             return json_decode($response, true);
         }
 
@@ -131,14 +139,14 @@ abstract class Model
     protected function getQueryParams(): ?array
     {
         $queryParams = [];
-        if (!sizeof($this->sorts) > 0) {
+        if (sizeof($this->sorts) > 0) {
             $sort_value = implode(',', array_merge($this->sorts));
             $queryParams[] = [
                 'sort' => $sort_value
             ];
         }
 
-        if (!sizeof($this->filters) > 0) {
+        if (sizeof($this->filters) > 0) {
             $queryParams['filter'] = $this->filters;
         }
 
@@ -162,14 +170,14 @@ abstract class Model
             /** @var CriminalCase $parent_class */
             $parent_class = $this->parentClass;
             $parent_class = $parent_class::urlResourceName();
-            $endpoint .= "$parent_class/{$this->parentId}/";
+            $endpoint .= "$parent_class/{$this->cleanStringForUri($this->parentId)}/";
         }
 
         if (!isset($this->id)) {
             return $endpoint . $this->urlResourceName();
         }
 
-        return $endpoint . $this->urlResourceName() . "/{$this->id}";
+        return $endpoint . $this->urlResourceName() . "/{$this->cleanStringForUri($this->id)}";
     }
 
     private function clearAllVariables(): void
@@ -190,6 +198,11 @@ abstract class Model
     public function setClient(AuthorizedClient $client): void
     {
         $this->authorizedClient = $client;
+    }
+
+    private function cleanStringForUri(string $value) : string
+    {
+        return urlencode(urlencode($value));
     }
 
 }
