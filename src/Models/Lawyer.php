@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Lawyer implements Model
+class Lawyer extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

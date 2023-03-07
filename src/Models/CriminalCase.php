@@ -2,77 +2,96 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class CriminalCase implements Model
+class CriminalCase extends Model
 {
-    use IsModel;
-
     protected ?string $id;
 
-    protected Complainant $complainant;
-
-    protected AssignedLawyer $assignedLawyer;
-
-    protected AssignedProsecutor $assignedProsecutor;
-
-    protected Action $action;
-
-    protected Recommendation $recommendation;
-
-    public function __construct()
+    public function assignedProsecutor(): ?AssignedProsecutor
     {
+        if (!$this->id) {
+            return null;
+        }
+
+        $assigned_prosecutor = new AssignedProsecutor(CriminalCase::class, $this->id);
+        $assigned_prosecutor->setClient($this->authorizedClient);
+        return $assigned_prosecutor;
     }
 
-    protected function initializeNestedModel(string $className, string $classInstance): ?NestedModel
+    public function assignedLawyer(): ?AssignedLawyer
+    {
+        if (!$this->id) {
+            return null;
+        }
+
+        $assigned_lawyer = new AssignedLawyer(CriminalCase::class, $this->id);
+        $assigned_lawyer->setClient($this->authorizedClient);
+        return $assigned_lawyer;
+    }
+
+    public function complainant(): ?Complainant
+    {
+        if (!$this->id) {
+            return null;
+        }
+
+        $complainant = new Complainant(CriminalCase::class, $this->id);
+        $complainant->setClient($this->authorizedClient);
+        return $complainant;
+    }
+
+    public function recommendation(): ?Recommendation
+    {
+        if (!$this->id) {
+            return null;
+        }
+
+        $recommendation = new Recommendation(CriminalCase::class, $this->id);
+        $recommendation->setClient($this->authorizedClient);
+        return $recommendation;
+    }
+
+    public function courtOrder(): ?NestedModel
     {
         if (! $this->id) {
             return null;
         }
 
-        /** @var NestedModel $classInstance */
-        $this->$classInstance = new $className(CriminalCase::class, $this->id);
-        $this->$classInstance->setClient($this->authorizedClient);
-
-        return $this->$classInstance;
+        $court_order = new CourtOrder(CriminalCase::class, $this->id);
+        $court_order->setClient($this->authorizedClient);
+        return $court_order;
     }
 
-    public function assignedProsecutor(): ?NestedModel
+    public function action(): ?Action
     {
-        return $this->initializeNestedModel(AssignedProsecutor::class, __FUNCTION__);
+        if (! $this->id) {
+            return null;
+        }
+
+        $action = new Action();
+        $action->setClient($this->authorizedClient);
+        return $action;
     }
 
-    public function assignedLawyer(): ?NestedModel
+    public function victim(): ?Victim
     {
-        return $this->initializeNestedModel(AssignedLawyer::class, __FUNCTION__);
+        if (! $this->id) {
+            return null;
+        }
+
+        $victim = new Victim(CriminalCase::class, $this->id);
+        $victim->setClient($this->authorizedClient);
+        return $victim;
     }
 
-    public function complainant(): ?NestedModel
+    public function suspect(): ?Suspect
     {
-        return $this->initializeNestedModel(Complainant::class, __FUNCTION__);
-    }
+        if (! $this->id) {
+            return null;
+        }
 
-    public function recommendation(): ?NestedModel
-    {
-        return $this->initializeNestedModel(Recommendation::class, __FUNCTION__);
-    }
-
-    public function courtOrder(): ?NestedModel
-    {
-        return $this->initializeNestedModel(CourtOrder::class, __FUNCTION__);
-    }
-
-    public function action(): ?NestedModel
-    {
-        return $this->initializeNestedModel(Action::class, __FUNCTION__);
-    }
-
-    public function victim(): ?NestedModel
-    {
-        return $this->initializeNestedModel(Victim::class, __FUNCTION__);
-    }
-
-    public function suspect(): ?NestedModel
-    {
-        return $this->initializeNestedModel(Suspect::class, __FUNCTION__);
+        $suspect = new Suspect(CriminalCase::class, $this->id);
+        $suspect->setClient($this->authorizedClient);
+        return $suspect;
     }
 
     public static function urlResourceName(): string

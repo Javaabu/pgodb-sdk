@@ -4,22 +4,10 @@ namespace Javaabu\PgoDB\Models;
 
 class Defendant extends NestedModel
 {
-    use IsModel;
 
-    protected function initializeNestedModel(string $className, string $classInstance): ?NestedModel
-    {
-        if (! $this->id) {
-            return null;
-        }
-
-        /** @var NestedModel $classInstance */
-        $this->$classInstance = new $className(Defendant::class, $this->id);
-        $this->$classInstance->setClient($this->authorizedClient);
-
-        return $this->$classInstance;
-    }
-
-    public function selectById(string $identifier, ?string $individual_type = null, ?string $country_code = null): array
+    public function selectById(string  $identifier,
+                               ?string $individual_type = null,
+                               ?string $country_code = null): array
     {
         return $this
             ->addFilter('search_by_govt_id', $identifier, $individual_type, $country_code)
@@ -36,8 +24,14 @@ class Defendant extends NestedModel
         return 'defendants';
     }
 
-    public function defendantCharge(): ?NestedModel
+    public function defendantCharge(): ?DefendantCharge
     {
-        return $this->initializeNestedModel(DefendantCharge::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $defendant_charge = new DefendantCharge(Defendant::class, $this->id);
+        $defendant_charge->setClient($this->authorizedClient);
+        return $defendant_charge;
     }
 }

@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Institution implements Model
+class Institution extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

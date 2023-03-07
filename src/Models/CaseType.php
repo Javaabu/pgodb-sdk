@@ -2,10 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class CaseType implements Model
+class CaseType extends Model
 {
-    use IsModel;
-
     public function selectById(string $identifier): array
     {
         return $this->addFilter('slug', $identifier)->filter();

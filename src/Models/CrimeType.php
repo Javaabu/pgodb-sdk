@@ -2,14 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class CrimeType implements Model
+class CrimeType extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
-
     public function selectById(string $identifier): array
     {
         return $this->addFilter('slug', $identifier)->filter();

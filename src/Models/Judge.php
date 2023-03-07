@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Judge implements Model
+class Judge extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

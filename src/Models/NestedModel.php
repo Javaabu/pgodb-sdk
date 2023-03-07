@@ -2,10 +2,15 @@
 
 namespace Javaabu\PgoDB\Models;
 
-abstract class NestedModel implements Model
+abstract class NestedModel extends Model
 {
-    public function __construct(protected ?string $parentClass,
-                                protected ?string $parentId)
+    protected ?string $parentClass;
+    protected ?string $parentId;
+
+    public function __construct(string $parentClass,
+                                string $parentId)
     {
+        $this->parentClass = $parentClass;
+        $this->parentId = $parentId;
     }
 }

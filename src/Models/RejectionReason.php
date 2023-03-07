@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class RejectionReason implements Model
+class RejectionReason extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

@@ -2,9 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class CourtOrderType implements Model
+class CourtOrderType extends Model
 {
-    use IsModel;
 
     public function selectById(string $identifier): array
     {

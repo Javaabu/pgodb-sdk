@@ -2,75 +2,117 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class CourtCase implements Model
+class CourtCase extends Model
 {
-    use IsModel;
 
-    public function __construct()
+    public function assignedProsecutor(): ?AssignedProsecutor
     {
-    }
-
-    protected function initializeNestedModel(string $className, string $classInstance): ?NestedModel
-    {
-        if (! $this->id) {
+        if (!$this->id) {
             return null;
         }
 
-        /** @var NestedModel $classInstance */
-        $this->$classInstance = new $className(CourtCase::class, $this->id);
-        $this->$classInstance->setClient($this->authorizedClient);
-
-        return $this->$classInstance;
+        $assigned_prosecutor = new AssignedProsecutor(CourtCase::class, $this->id);
+        $assigned_prosecutor->setClient($this->authorizedClient);
+        return $assigned_prosecutor;
     }
 
-    public function assignedProsecutor(): ?NestedModel
+    public function assignedJudge(): ?AssignedJudge
     {
-        return $this->initializeNestedModel(AssignedProsecutor::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $assigned_judge = new AssignedJudge(CourtCase::class, $this->id);
+        $assigned_judge->setClient($this->authorizedClient);
+        return $assigned_judge;
     }
 
-    public function assignedJudge(): ?NestedModel
+    public function assignedLawyer(): ?AssignedLawyer
     {
-        return $this->initializeNestedModel(AssignedJudge::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $assigned_lawyer = new AssignedLawyer(CourtCase::class, $this->id);
+        $assigned_lawyer->setClient($this->authorizedClient);
+        return $assigned_lawyer;
     }
 
-    public function assignedLawyer(): ?NestedModel
+    public function recommendation(): ?Recommendation
     {
-        return $this->initializeNestedModel(AssignedLawyer::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $recommendation = new Recommendation(CourtCase::class, $this->id);
+        $recommendation->setClient($this->authorizedClient);
+        return $recommendation;
     }
 
-    public function recommendation(): ?NestedModel
+    public function action(): ?Action
     {
-        return $this->initializeNestedModel(Recommendation::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $action = new Action();
+        $action->setClient($this->authorizedClient);
+        return $action;
     }
 
-    public function action(): ?NestedModel
+    public function courtProceeding(): ?CourtProceeding
     {
-        return $this->initializeNestedModel(Action::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $court_proceeding = new CourtProceeding(CourtCase::class, $this->id);
+        $court_proceeding->setClient($this->authorizedClient);
+        return $court_proceeding;
     }
 
-    public function courtProceeding(): ?NestedModel
+    public function defendant(): ?Defendant
     {
-        return $this->initializeNestedModel(CourtProceeding::class, __FUNCTION__);
-    }
+        if (!$this->id) {
+            return null;
+        }
 
-    public function defendant(): ?NestedModel
-    {
-        return $this->initializeNestedModel(Defendant::class, __FUNCTION__);
+        $defendant = new Defendant(CourtCase::class, $this->id);
+        $defendant->setClient($this->authorizedClient);
+        return $defendant;
     }
 
     public function courtOrder(): ?NestedModel
     {
-        return $this->initializeNestedModel(CourtOrder::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $court_order = new CourtOrder(CourtCase::class, $this->id);
+        $court_order->setClient($this->authorizedClient);
+        return $court_order;
     }
 
     public function detention(): ?NestedModel
     {
-        return $this->initializeNestedModel(Detention::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $detention = new Detention(CourtCase::class, $this->id);
+        $detention->setClient($this->authorizedClient);
+        return $detention;
     }
 
     public function victim(): ?NestedModel
     {
-        return $this->initializeNestedModel(Victim::class, __FUNCTION__);
+        if (!$this->id) {
+            return null;
+        }
+
+        $victim = new Victim(CourtCase::class, $this->id);
+        $victim->setClient($this->authorizedClient);
+        return $victim;
     }
 
     public static function urlResourceName(): string

@@ -20,7 +20,7 @@ class AuthorizedClient
         ]);
     }
 
-    public function delete(string $endpoint): bool|\Psr\Http\Message\StreamInterface|string
+    public function delete(string $endpoint)
     {
         try {
             $response = $this->client->delete($endpoint);
@@ -95,10 +95,10 @@ class AuthorizedClient
         }
     }
 
-    public function get(string $endpoint, array $filters = []): string
+    public function get(string $endpoint, array $options = []): string
     {
         try {
-            $response = $this->client->get($endpoint, $filters);
+            $response = $this->client->get($endpoint, $options);
             if ($response->getStatusCode() != 200) {
                 return json_encode([
                     'errors' => [

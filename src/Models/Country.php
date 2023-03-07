@@ -2,17 +2,15 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class Country implements Model
+class Country extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
+    protected ?string $id;
 
     public function state(): ?State
     {
-        return $this->initializeModel(__FUNCTION__);
+        $state = new State(Country::class, $this->id);
+        $state->setClient($this->authorizedClient);
+        return $state;
     }
 
     public static function urlResourceName(): string

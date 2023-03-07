@@ -22,129 +22,106 @@ class PgoDB
 {
     protected AuthorizedClient $authorizedClient;
 
-    protected CriminalCase $criminalCase;
-
-    protected CourtCase $courtCase;
-
-    protected Institution $institution;
-
-    protected CrimeType $crimeType;
-
-    protected CaseType $caseType;
-
-    protected CourtOrderType $courtOrderType;
-
-    protected ActionType $actionType;
-
-    protected Company $company;
-
-    protected EducationalLevel $educationalLevel;
-
-    protected VictimCategory $victimCategory;
-
-    // individuals
-    protected Individual $individual;
-
-    protected Lawyer $lawyer;
-
-    protected Judge $judge;
-
-    protected Country $country;
-
-    public function __construct(string $apiKey, string $baseUri)
+    public function __construct(string $apiKey, string $baseUri = 'https://pgodb.javaabu.net')
     {
         $this->authorizedClient = new AuthorizedClient($apiKey, $baseUri);
-
-        $this->criminalCase = new CriminalCase();
-        $this->courtCase = new CourtCase();
-        $this->institution = new Institution();
-        $this->crimeType = new CrimeType();
-        $this->caseType = new CaseType();
-        $this->courtOrderType = new CourtOrderType();
-        $this->actionType = new ActionType();
-        $this->company = new Company();
-        $this->individual = new Individual();
-        $this->educationalLevel = new EducationalLevel();
-        $this->victimCategory = new VictimCategory();
-        $this->country = new Country();
-        $this->lawyer = new Lawyer();
-        $this->judge = new Judge();
-    }
-
-    protected function initializeModel(string $modelName)
-    {
-        $this->$modelName->setClient($this->authorizedClient);
-
-        return $this->$modelName;
     }
 
     public function criminalCase(): ?CriminalCase
     {
-        return $this->initializeModel(__FUNCTION__);
+        $criminal_case = new CriminalCase();
+        $criminal_case->setClient($this->authorizedClient);
+        return $criminal_case;
     }
 
     public function courtCase(): ?CourtCase
     {
-        return $this->initializeModel(__FUNCTION__);
+        $court_case = new CourtCase();
+        $court_case->setClient($this->authorizedClient);
+        return $court_case;
     }
 
     public function institution(): ?Institution
     {
-        return $this->initializeModel(__FUNCTION__);
+        $institution = new Institution();
+        $institution->setClient($this->authorizedClient);
+        return $institution;
     }
 
     public function crimeType(): ?CrimeType
     {
-        return $this->initializeModel(__FUNCTION__);
+        $crime_type = new CrimeType();
+        $crime_type->setClient($this->authorizedClient);
+        return $crime_type;
     }
 
     public function caseType(): ?CaseType
     {
-        return $this->initializeModel(__FUNCTION__);
+       $case_type = new CaseType();
+       $case_type->setClient($this->authorizedClient);
+       return $case_type;
     }
 
     public function actionType(): ?ActionType
     {
-        return $this->initializeModel(__FUNCTION__);
+        $action_type = new ActionType();
+        $action_type->setClient($this->authorizedClient);
+        return $action_type;
     }
 
     public function company(): ?Company
     {
-        return $this->initializeModel(__FUNCTION__);
+        $company = new Company();
+        $company->setClient($this->authorizedClient);
+        return $company;
     }
 
     public function individual(): ?Individual
     {
-        return $this->initializeModel(__FUNCTION__);
+        $individual = new Individual();
+        $individual->setClient($this->authorizedClient);
+        return $individual;
     }
 
     public function judge(): ?Judge
     {
-        return $this->initializeModel(__FUNCTION__);
+        $judge = new Judge();
+        $judge->setClient($this->authorizedClient);
+        return $judge;
     }
 
     public function lawyer(): ?Lawyer
     {
-        return $this->initializeModel(__FUNCTION__);
+        $lawyer = new Lawyer();
+        $lawyer->setClient($this->authorizedClient);
+        return $lawyer;
     }
 
     public function educationalLevel(): ?EducationalLevel
     {
-        return $this->initializeModel(__FUNCTION__);
+        $educational_level = new EducationalLevel();
+        $educational_level->setClient($this->authorizedClient);
+        return $educational_level;
     }
 
     public function victimCategory(): ?VictimCategory
     {
-        return $this->initializeModel(__FUNCTION__);
+        $victim_category = new VictimCategory();
+        $victim_category->setClient($this->authorizedClient);
+        return $victim_category;
     }
 
     public function courtOrderType(): ?CourtOrderType
     {
-        return $this->initializeModel(__FUNCTION__);
+        $court_order_type = new CourtOrderType();
+        $court_order_type->setClient($this->authorizedClient);
+        return $court_order_type;
     }
 
     public function country(): ?Country
     {
-        return $this->initializeModel(__FUNCTION__);
+        $country = new Country();
+        $country->setClient($this->authorizedClient);
+        return $country;
     }
 }

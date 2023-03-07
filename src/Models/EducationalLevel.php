@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class EducationalLevel implements Model
+class EducationalLevel extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

@@ -2,13 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class VictimCategory implements Model
+class VictimCategory extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
 
     public static function urlResourceName(): string
     {

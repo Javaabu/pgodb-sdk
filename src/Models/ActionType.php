@@ -2,14 +2,8 @@
 
 namespace Javaabu\PgoDB\Models;
 
-class ActionType implements Model
+class ActionType extends Model
 {
-    use IsModel;
-
-    public function __construct()
-    {
-    }
-
     public static function urlResourceName(): string
     {
         return 'action-types';
