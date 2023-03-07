@@ -12,6 +12,7 @@ class State extends NestedModel
 
         $city = new City(State::class, $this->id);
         $city->setClient($this->authorizedClient);
+
         return $city;
     }
 
