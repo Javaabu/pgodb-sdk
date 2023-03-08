@@ -4,6 +4,12 @@ namespace Javaabu\PgoDB\Models;
 
 class Recommendation extends NestedModel
 {
+    /**
+     * Retrieves the recommendation by its reference number
+     *
+     * @param string $id
+     * @return array
+     */
     public function find(string $id): array
     {
         return $this
