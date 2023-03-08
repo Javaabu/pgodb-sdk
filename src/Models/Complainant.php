@@ -6,9 +6,6 @@ class Complainant extends NestedModel
 {
     /**
      * Retrieves the individual based on their government id (national id-card, passport number)
-     *
-     * @param string $id
-     * @return array
      */
     public function find(string $id): array
     {
