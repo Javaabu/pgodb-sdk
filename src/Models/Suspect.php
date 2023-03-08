@@ -4,10 +4,10 @@ namespace Javaabu\PgoDB\Models;
 
 class Suspect extends NestedModel
 {
-    public function find(string $identifier, ?string $individual_type = null, ?string $country_code = null): array
+    public function find(string $id): array
     {
         return $this
-            ->addFilter('search_by_govt_id', $identifier, $individual_type, $country_code)
+            ->addFilter('search_by_govt_id', $id)
             ->get();
     }
 

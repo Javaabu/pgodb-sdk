@@ -4,10 +4,10 @@ namespace Javaabu\PgoDB\Models;
 
 class Recommendation extends NestedModel
 {
-    public function find(string $identifier): array
+    public function find(string $id): array
     {
         return $this
-            ->addFilter('reference_number', $identifier)
+            ->addFilter('reference_number', $id)
             ->get();
     }
 

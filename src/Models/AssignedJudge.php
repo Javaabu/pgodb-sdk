@@ -4,12 +4,17 @@ namespace Javaabu\PgoDB\Models;
 
 class AssignedJudge extends NestedModel
 {
-    public function find(string $identifier,
-                               ?string $individual_type = null,
-                               ?string $country_code = null): array
+    /**
+     * Retrieves based on government id (national identity card number, passport number)
+     * or Department of Judicial Administration's registration number
+     *
+     * @param string $id
+     * @return array
+     */
+    public function find(string $id): array
     {
         return $this
-            ->addFilter('search_by_govt_id', $identifier, $individual_type, $country_code)
+            ->addFilter('search_by_govt_id', $id)
             ->get();
     }
 
