@@ -7,9 +7,6 @@ class Suspect extends NestedModel
     /**
      * Retrieves the suspect by their government id (either their national identity card number
      * or their passport number).
-     *
-     * @param string $id
-     * @return array
      */
     public function find(string $id): array
     {
