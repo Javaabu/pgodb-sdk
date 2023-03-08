@@ -4,7 +4,7 @@ namespace Javaabu\PgoDB\Models;
 
 class Institution extends Model
 {
-    public function find(string $id) : array
+    public function find(string $id): array
     {
         return $this
             ->addFilter('search_by_code_or_slug', $id)
