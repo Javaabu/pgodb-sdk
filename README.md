@@ -28,13 +28,19 @@ $pgoDb = new PgoDB($apiKey, $baseUri);
 $pgoDb->criminalCase()->get();
 ```
 ### Retrieve by Id
+We do not use database ids, but rather administrative identification strings such as an individual's
+national identity card number, passport number, registration number (for judges and lawyers), incident reference numbers, gaziyyah numbers and the like.
+
 ```php
 $pgoDb->criminalCase()->find($idString);
 ```
-This is a wrapper for the `filter` functionality built into this package. An alternate way of doing this is as follows:
+This is a wrapper for the `filter` functionality built into this package. 
+An alternate way of doing this is as follows:
 ```php
 $pgoDb->criminalCase()->addFilter("search", $idString)->get();
 ```
+The search term would change depending on the model being retrieved. The `find` function
+abstracts this complexity away for the user.
 
 ### Store Non-Nested Model
 
