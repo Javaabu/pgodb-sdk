@@ -1,14 +1,19 @@
 # The Criminal Justice Sector DataShare SDK
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/javaabu-pvt-ltd/criminal-justice-sector-db-sdk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/javaabu-pvt-ltd/criminal-justice-sector-db-sdk/actions/workflows/run-tests.yml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/javaabu/pgodb-sdk.svg?style=flat-square)](https://packagist.org/packages/javaabu/pgodb-sdk)
 
 The Criminal Justice Sector DataShare SDKis a wrapper package that allows developers to integrate their existing data
 infrastructure with the data-sharing platform developed by the Prosecutor General's Office.
 
 ## Installation
-Coming soon.
-## Basic Usage
+Use Composer to install the package
+```bigquery
+composer require javaabu/pgodb-sdk
+```
 
+### Pre-Requisites
+- PHP 7.4 
+## Basic Usage
 ### Initialisation
 
 The API key is taken as a single, mandatory parameter.  
@@ -131,11 +136,6 @@ The actual API request will be sent once these ending functions are called at th
 -   `store($data)` Returns the newly stored record,
 -   `update($data)` Returns the updated record.
 
-## Testing
-
-```bash
-composer test
-```
 
 ## Changelog
 
