@@ -2,8 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/javaabu/pgodb-sdk.svg?style=flat-square)](https://packagist.org/packages/javaabu/pgodb-sdk)
 
-The Criminal Justice Sector DataShare SDKis a wrapper package that allows developers to integrate their existing data
-infrastructure with the data-sharing platform developed by the Prosecutor General's Office.
+General PHP SDK to interact with the API of the Prosecutor General's Office's criminal justice sector database.
 
 ## Installation
 Use Composer to install the package
